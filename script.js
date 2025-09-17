@@ -82,3 +82,24 @@ function showQuestion() {
     document.getElementById('answer_3').innerHTML = question['answer_3'];
     document.getElementById('answer_4').innerHTML = question['answer_4'];
 }
+
+function answer(selection) {
+    let question = questions[currentQuestion];
+    let selectedQuestionNumber = selection.slice(-1);
+    let idOfRightAnswer = `answer_${question['right_answer']}`;
+
+    if (selectedQuestionNumber == question['right_answer']) {
+        console.log('richtig');
+        document.getElementById(selection).parentNode.classList.add('bg-success');
+    } else {
+        console.log('falsch');
+        document.getElementById(selection).parentNode.classList.add('bg-danger');
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+    }
+
+    document.getElementById('next-button').disabled = false;
+}
+
+function nextQuestion() {
+    
+}

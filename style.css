@@ -21,3 +21,12 @@ body {
     justify-content: space-between;
     padding-top: 8px;
 }
+
+.quiz-answer-card:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.bg-success, .bg-danger {
+    color: white;
+}

@@ -30,3 +30,16 @@ body {
 .bg-success, .bg-danger {
     color: white;
 }
+
+.width_100 {
+    width: 100%;
+}
+
+.text_center {
+    text-align: center;
+}
+
+.final_text {
+    font-size: 40px;
+    margin-bottom: 24px;
+}

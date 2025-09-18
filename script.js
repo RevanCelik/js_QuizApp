@@ -67,6 +67,8 @@ let questions = [
 
 let currentQuestion = 0;
 
+let rightQuestions = 0;
+
 function init() {
     document.getElementById('questions_length').innerHTML = questions.length;
 
@@ -74,13 +76,27 @@ function init() {
 }
 
 function showQuestion() {
-    let question = questions[currentQuestion];
-    
-    document.getElementById('questiontext').innerHTML = question['question'];
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
+
+    if (currentQuestion >= questions.length) {
+
+        document.getElementById('endScreen').style = '';
+        document.getElementById('questionBody').style = 'display:none;'
+
+        document.getElementById('amount_questions').innerHTML = questions.length;
+        document.getElementById('amount_right_questions').innerHTML = rightQuestions;
+
+        document.getElementById('end_screen_image').src = 'img/dragonwithoutmark.png';
+    } else {
+
+        let question = questions[currentQuestion];
+
+        document.getElementById('question_Number').innerHTML = currentQuestion + 1;
+        document.getElementById('questiontext').innerHTML = question['question'];
+        document.getElementById('answer_1').innerHTML = question['answer_1'];
+        document.getElementById('answer_2').innerHTML = question['answer_2'];
+        document.getElementById('answer_3').innerHTML = question['answer_3'];
+        document.getElementById('answer_4').innerHTML = question['answer_4'];
+    }
 }
 
 function answer(selection) {
@@ -91,6 +107,7 @@ function answer(selection) {
     if (selectedQuestionNumber == question['right_answer']) {
         console.log('richtig');
         document.getElementById(selection).parentNode.classList.add('bg-success');
+        rightQuestions++;
     } else {
         console.log('falsch');
         document.getElementById(selection).parentNode.classList.add('bg-danger');
@@ -101,5 +118,20 @@ function answer(selection) {
 }
 
 function nextQuestion() {
-    
+    currentQuestion++;
+    document.getElementById('next-button').disabled = true;
+    resetAnswerButton();
+    showQuestion();
 }
+
+function resetAnswerButton() {
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_1').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+}
+

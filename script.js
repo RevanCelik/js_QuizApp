@@ -79,6 +79,9 @@ function showQuestion() {
 
     if (currentQuestion >= questions.length) {
 
+        document.getElementById('progress-bar').innerHTML = `100 %`;
+        document.getElementById('progress-bar').style.width = `100%`;
+
         document.getElementById('endScreen').style = '';
         document.getElementById('questionBody').style = 'display:none;'
 
@@ -87,6 +90,13 @@ function showQuestion() {
 
         document.getElementById('end_screen_image').src = 'img/dragonwithoutmark.png';
     } else {
+
+        let percent = currentQuestion / questions.length;
+        percent = Math.round(percent * 100);
+        document.getElementById('progress-bar').innerHTML = `${percent}%`;
+        document.getElementById('progress-bar').style.width = `${percent}%`;
+
+        console.log('Fortschritt:', percent)
 
         let question = questions[currentQuestion];
 

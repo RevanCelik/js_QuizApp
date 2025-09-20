@@ -27,8 +27,7 @@
 
     <div class="container">
         <div class="card quiz-card">
-            <img src="./img/background.jpg" id="end_screen_image" class="card-img-top"
-                alt="Zahlen und Stifte Hintergrund">
+            <img src="./img/background.jpg" id="end_screen_image" class="card-img-top">
 
             <div class="progress">
                 <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%;">25%</div>
@@ -39,6 +38,11 @@
 
                 <div class="text_center">Du hast <b id="amount_right_questions">X</b> Fragen von <b
                         id="amount_questions">X</b> richtig beantwortet!</div>
+
+                <div class="button_style">
+                    <button onclick="restartGame()" class="btn btn-primary" id="restart_quiz">Erneut
+                        spielen</button>
+                </div>
             </div>
 
 

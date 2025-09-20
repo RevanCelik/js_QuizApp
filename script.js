@@ -83,7 +83,7 @@ function showQuestion() {
         document.getElementById('progress-bar').style.width = `100%`;
 
         document.getElementById('endScreen').style = '';
-        document.getElementById('questionBody').style = 'display:none;'
+        document.getElementById('questionBody').style = 'display:none;';
 
         document.getElementById('amount_questions').innerHTML = questions.length;
         document.getElementById('amount_right_questions').innerHTML = rightQuestions;
@@ -96,10 +96,7 @@ function showQuestion() {
         document.getElementById('progress-bar').innerHTML = `${percent}%`;
         document.getElementById('progress-bar').style.width = `${percent}%`;
 
-        console.log('Fortschritt:', percent)
-
         let question = questions[currentQuestion];
-
         document.getElementById('question_Number').innerHTML = currentQuestion + 1;
         document.getElementById('questiontext').innerHTML = question['question'];
         document.getElementById('answer_1').innerHTML = question['answer_1'];
@@ -143,5 +140,16 @@ function resetAnswerButton() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+}
+
+function restartGame() {
+    document.getElementById('end_screen_image').src = '/img/background.jpg';
+    rightQuestions = 0;
+    currentQuestion = 0;
+
+    init();
+
+    document.getElementById('endScreen').style = 'display:none;';
+    document.getElementById('questionBody').style = '';
 }
 

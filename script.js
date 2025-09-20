@@ -66,8 +66,9 @@ let questions = [
 ];
 
 let currentQuestion = 0;
-
 let rightQuestions = 0;
+let AUDIO_SUCCESS = new Audio('sounds/success.mp3');
+let AUDIO_WRONG = new Audio('sounds/wrong.mp3');
 
 function init() {
     document.getElementById('questions_length').innerHTML = questions.length;
@@ -82,13 +83,8 @@ function showQuestion() {
         document.getElementById('progress-bar').innerHTML = `100 %`;
         document.getElementById('progress-bar').style.width = `100%`;
 
-        document.getElementById('endScreen').style = '';
-        document.getElementById('questionBody').style = 'display:none;';
+        showEndScreen();
 
-        document.getElementById('amount_questions').innerHTML = questions.length;
-        document.getElementById('amount_right_questions').innerHTML = rightQuestions;
-
-        document.getElementById('end_screen_image').src = 'img/dragonwithoutmark.png';
     } else {
 
         let percent = currentQuestion / questions.length;
@@ -96,14 +92,28 @@ function showQuestion() {
         document.getElementById('progress-bar').innerHTML = `${percent}%`;
         document.getElementById('progress-bar').style.width = `${percent}%`;
 
-        let question = questions[currentQuestion];
-        document.getElementById('question_Number').innerHTML = currentQuestion + 1;
-        document.getElementById('questiontext').innerHTML = question['question'];
-        document.getElementById('answer_1').innerHTML = question['answer_1'];
-        document.getElementById('answer_2').innerHTML = question['answer_2'];
-        document.getElementById('answer_3').innerHTML = question['answer_3'];
-        document.getElementById('answer_4').innerHTML = question['answer_4'];
+        updateNextQuestion();
     }
+}
+
+function showEndScreen() {
+    document.getElementById('endScreen').style = '';
+    document.getElementById('questionBody').style = 'display:none;';
+
+    document.getElementById('amount_questions').innerHTML = questions.length;
+    document.getElementById('amount_right_questions').innerHTML = rightQuestions;
+
+    document.getElementById('end_screen_image').src = 'img/dragonwithoutmark.png';
+}
+
+function updateNextQuestion() {
+    let question = questions[currentQuestion];
+    document.getElementById('question_Number').innerHTML = currentQuestion + 1;
+    document.getElementById('questiontext').innerHTML = question['question'];
+    document.getElementById('answer_1').innerHTML = question['answer_1'];
+    document.getElementById('answer_2').innerHTML = question['answer_2'];
+    document.getElementById('answer_3').innerHTML = question['answer_3'];
+    document.getElementById('answer_4').innerHTML = question['answer_4'];
 }
 
 function answer(selection) {
@@ -114,11 +124,13 @@ function answer(selection) {
     if (selectedQuestionNumber == question['right_answer']) {
         console.log('richtig');
         document.getElementById(selection).parentNode.classList.add('bg-success');
+        AUDIO_SUCCESS.play();
         rightQuestions++;
     } else {
         console.log('falsch');
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+        AUDIO_WRONG.play();
     }
 
     document.getElementById('next-button').disabled = false;
